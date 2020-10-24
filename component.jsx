@@ -1,9 +1,16 @@
 import React from 'react';
-import { jsxHelper } from './jsx-helper.jsx';
 
 export class Component extends React.Component {
 
   render() {
-    return jsxHelper.render(this, this.createView);
+    try {
+      return this.createView();
+    } catch (error) {
+      return (
+        <div className="render-error">
+          {error.message || error} in {this.constructor.name}
+        </div>
+      );
+    }
   }
 }
