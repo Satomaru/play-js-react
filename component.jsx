@@ -53,7 +53,13 @@ export class Component extends React.Component {
 
   render() {
     try {
-      return this.createView();
+      const view = this.createView();
+
+      if (!view) {
+        throw new Error("illegal view.");
+      }
+
+      return view;
     } catch (error) {
       return (
         <div className="render-error">
